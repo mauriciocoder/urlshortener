@@ -1,17 +1,20 @@
 const mongo = require("mongodb").MongoClient;
 const sequenceDao = require("./sequenceDao.js");
 //var dbUrl = "mongodb://localhost:27017/urlshortener-fcc-api";
-var dbUrl = process.env.DB_URL;
+var dbUrl = process.env.SHORTENER_APP_DB_URL;
 module.exports = {
     find: function find(url, callback) {
+        console.log("Env variable DAO SHORTENER_APP_DB_URL = " + dbUrl);
         mongo.connect(dbUrl, handleFindUrl.bind(null, url, callback));
     },
     
     findBySequence: function findBySequence(sequence, callback) {
+        console.log("Env variable DAO SHORTENER_APP_DB_URL = " + dbUrl);
         mongo.connect(dbUrl, handleFindBySequence.bind(null, sequence, callback));
     },
     
     save: function save(url, callback) {
+        console.log("Env variable DAO SHORTENER_APP_DB_URL = " + dbUrl);
         mongo.connect(dbUrl, handleSaveUrl.bind(null, url, callback));
     }
 };
