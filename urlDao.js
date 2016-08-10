@@ -6,10 +6,30 @@ module.exports = {
         mongo.connect(dbUrl, handleFindUrl.bind(null, url, callback));
     },
     
+    findBySequence: function findBySequence(sequence, callback) {
+        mongo.connect(dbUrl, handleFindBySequence.bind(null, sequence, callback));
+    },
+    
     save: function save(url, callback) {
         mongo.connect(dbUrl, handleSaveUrl.bind(null, url, callback));
     }
 };
+
+function handleFindBySequence(sequence, callback, err, db) {
+    if (err) {
+        throw err;
+    } else {
+        var collectionName = "url";
+        var urlColl = db.collection(collectionName);
+        urlColl.find({seq: parseInt(sequence)}).toArray(function(err, documents) {
+            if (err) {
+                throw err;
+            }
+            return callback(documents);
+            db.close;   // Refactor. Find better place to close it!!
+        });
+    }
+}
 
 function handleFindUrl(url, callback, err, db) {
     if (err) {
