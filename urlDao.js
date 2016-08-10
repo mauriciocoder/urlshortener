@@ -1,6 +1,7 @@
 const mongo = require("mongodb").MongoClient;
 const sequenceDao = require("./sequenceDao.js");
-var dbUrl = "mongodb://localhost:27017/urlshortener-fcc-api";
+//var dbUrl = "mongodb://localhost:27017/urlshortener-fcc-api";
+var dbUrl = process.env.DB_URL;
 module.exports = {
     find: function find(url, callback) {
         mongo.connect(dbUrl, handleFindUrl.bind(null, url, callback));
