@@ -8,6 +8,7 @@ var port = process.env.PORT || 8080;
 app.listen(port, handleServerStart);
 function handleServerStart() {
     console.log("URLShortener app listening on port " + process.env.PORT);
+    console.log("Env variable SHORTENER_APP_DB_URL = " + process.env.SHORTENER_APP_DB_URL);
 }
 
 // To short url
